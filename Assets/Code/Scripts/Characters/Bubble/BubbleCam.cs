@@ -45,7 +45,7 @@ namespace Code.Scripts.Characters.Bubble
         {
             if (!player) return;
             FollowPlayer();
-            //HandleRotations();
+            HandleRotations();
             HandleCollisions();
         }
 
