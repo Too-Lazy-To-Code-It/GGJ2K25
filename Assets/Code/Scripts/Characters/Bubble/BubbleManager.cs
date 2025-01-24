@@ -5,16 +5,20 @@ using UnityEngine.Serialization;
 namespace Code.Scripts.Characters.Bubble
 {
     public class BubbleManager : CharacterManager
-    { 
+    {
+        [HideInInspector]public Rigidbody rb;
+        [HideInInspector]public BubbleLocomotion locomotion;
         protected override void Awake()
         {
             base.Awake();
+            rb = GetComponent<Rigidbody>();
+            locomotion = GetComponent<BubbleLocomotion>();
             
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
-            
+            locomotion.HandleAllMovements();
         }
 
         private void LateUpdate()
