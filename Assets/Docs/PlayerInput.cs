@@ -123,7 +123,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""CameraMoving"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""c66339c7-c650-4cc4-8903-84013448da21"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",

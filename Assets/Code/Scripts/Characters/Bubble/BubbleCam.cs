@@ -9,13 +9,13 @@ namespace Code.Scripts.Characters.Bubble
         public BubbleManager player;
         [SerializeField] Transform cameraPivotTransform;
 
-        [Header("Camera Settings")] private float _cameraSmoothSpeed = 300; //kolma akber kol matabta camera bch tousel lel player
+        [Header("Camera Settings")] private float _cameraSmoothSpeed = 1; //kolma akber kol matabta camera bch tousel lel player
 
-        [SerializeField] private float leftAndRightRotationSpeed = 100;
-        [SerializeField] private float upAndDownRotationSpeed = 100;
-        [SerializeField] private float maximumPivot = 60;
-        [SerializeField] private float minimumPivot = -30;
-        [SerializeField] private float cameraCollisionRadius = 0.2f;
+        [SerializeField] private float leftAndRightRotationSpeed = 50;
+        [SerializeField] private float upAndDownRotationSpeed = 50;
+        [SerializeField] private float maximumPivot = 30;
+        [SerializeField] private float minimumPivot = -15;
+        [SerializeField] private float cameraCollisionRadius = 1f;
         [SerializeField] LayerMask colliderLayerMask;
 
         [Header("Camera Values")] 

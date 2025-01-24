@@ -7,7 +7,7 @@ namespace Code.Scripts.Characters
     {
         protected virtual void Awake()
         {
-            
+            DontDestroyOnLoad(this);
         }
     }
 }
