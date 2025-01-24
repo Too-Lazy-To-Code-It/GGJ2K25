@@ -9,8 +9,7 @@ namespace Code.Scripts.Characters.Bubble
         public BubbleManager player;
         [SerializeField] Transform cameraPivotTransform;
 
-        [Header("Camera Settings")]
-        private float _cameraSmoothSpeed = 1; //kolma akber kol matabta camera bch tousel lel player
+        [Header("Camera Settings")] private float _cameraSmoothSpeed = 300; //kolma akber kol matabta camera bch tousel lel player
 
         [SerializeField] private float leftAndRightRotationSpeed = 100;
         [SerializeField] private float upAndDownRotationSpeed = 100;
@@ -46,7 +45,7 @@ namespace Code.Scripts.Characters.Bubble
         {
             if (!player) return;
             FollowPlayer();
-            HandleRotations();
+            //HandleRotations();
             HandleCollisions();
         }
 
