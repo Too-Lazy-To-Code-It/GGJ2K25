@@ -19,6 +19,15 @@ namespace Code.Scripts.Characters.Bubble
             
         }
 
+        private void Update()
+        {
+            if (PlayerInputManager.Instance.interactInput)
+            {
+                PlayerInputManager.Instance.interactInput = false;
+                locomotion.RestNow();
+            }
+        }
+
         private void FixedUpdate()
         {
             locomotion.HandleAllMovements();
