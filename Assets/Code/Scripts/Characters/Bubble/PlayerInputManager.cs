@@ -28,7 +28,7 @@ namespace Code.Scripts.Characters.Bubble
         [Header("Character Actions")] 
         [SerializeField] private bool interactInput;
         [HideInInspector] public bool dashInput;
-        [SerializeField] private bool jumpInput;
+        [HideInInspector] public bool jumpInput;
 
 
         private void Awake()
