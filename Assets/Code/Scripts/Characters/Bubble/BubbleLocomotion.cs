@@ -191,7 +191,7 @@ namespace Code.Scripts.Characters.Bubble
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.CompareTag("Ground") &&  isJumping == true ) // Ensure the ground has the "Ground" tag
+            if (collision.gameObject.CompareTag("Ground") ) // Ensure the ground has the "Ground" tag
             {
                 isGrounded = true;
                 isJumping = false;
