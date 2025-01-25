@@ -36,9 +36,9 @@ namespace Code.Scripts.Characters.Bubble
         private Vector3 dashVelocity;
         private Vector3 jumpVelocity;
         
-        private float dashForce = 15f;
+        private float dashForce = 10f;
         private float dashDuration = 0.8f;
-        private float jumpForce = 15f;
+        private float jumpForce = 7.5f;
         private float jumpDuration = 0.8f;
 
         private void Awake()
