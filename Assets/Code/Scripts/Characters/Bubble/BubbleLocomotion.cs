@@ -20,14 +20,22 @@ namespace Code.Scripts.Characters.Bubble
         [SerializeField] private float maximumSpeed = 4.5f;
         [SerializeField] private float rotationSpeed = 20f;
         private float _dashCooldown;
+        private float _jumpCooldown;
+        private float _jumpResistanceCd;
+
         
         
         private bool isDashing = false;
+        private bool isJumping = false;
         private float dashTimeLeft = 0f;
+        private float jumpTimeLeft = 0f;
         private Vector3 dashVelocity;
+        private Vector3 jumpVelocity;
         
         private float dashForce = 15f;
-        private float dashDuration = 0.8f; 
+        private float dashDuration = 0.8f;
+        private float jumpForce = 15f;
+        private float jumpDuration = 0.8f;
 
         private void Awake()
         {
@@ -45,6 +53,7 @@ namespace Code.Scripts.Characters.Bubble
             HandleGroundedMovement();
             HandleRotations();
             HandleDash();
+            HandleJump();
 
         }
 
@@ -136,6 +145,59 @@ namespace Code.Scripts.Characters.Bubble
                 isDashing = false;
                 
                 _bubbleManager.rb.linearDamping = Mathf.Lerp(_bubbleManager.rb.linearDamping, 1, Time.fixedDeltaTime * 5);
+            }
+        }
+        private void HandleJump()
+        {
+            if (PlayerInputManager.Instance.jumpInput && !isJumping && _jumpCooldown <= 0f)
+            {
+                Debug.Log("dumping original value: " + _bubbleManager.rb.linearDamping);
+                Debug.Log("Jump initiated.");
+
+                _jumpCooldown = 3f; // Reset jump cooldown
+                _jumpResistanceCd = 5f;
+                PlayerInputManager.Instance.jumpInput = false;
+
+                isJumping = true;
+                isGrounded = false; 
+                _bubbleManager.rb.linearDamping = 1; 
+                jumpTimeLeft = jumpDuration;
+                jumpVelocity = Vector3.up * jumpForce;
+
+               
+                PerformJump();
+            }
+
+            if (_jumpCooldown > 0f)
+            {
+                _jumpCooldown -= Time.deltaTime;
+                _jumpCooldown = Mathf.Clamp(_jumpCooldown, 0, float.MaxValue);
+            }
+        }
+
+        private void PerformJump()
+        {
+            Vector3 currentVelocity = _bubbleManager.rb.linearVelocity;
+            _bubbleManager.rb.linearVelocity = new Vector3(currentVelocity.x, jumpVelocity.y, currentVelocity.z);
+
+            
+
+           
+
+            Debug.Log("dumping change value  " + _bubbleManager.rb.linearDamping);
+        }
+        private bool isGrounded;
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag("Ground") &&  isJumping == true ) // Ensure the ground has the "Ground" tag
+            {
+                
+                isGrounded = true;
+                isJumping = false;
+                Debug.Log("velocity  thenya" + _bubbleManager.rb.linearVelocity.y);
+                _bubbleManager.rb.linearDamping = 0; 
+              
             }
         }
 
