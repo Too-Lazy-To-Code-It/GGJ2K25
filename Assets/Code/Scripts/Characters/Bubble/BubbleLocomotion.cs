@@ -19,6 +19,7 @@ namespace Code.Scripts.Characters.Bubble
         [SerializeField] private float movingSpeed=5f;
         [SerializeField] private float maximumSpeed = 4.5f;
         [SerializeField] private float rotationSpeed = 20f;
+        private float _dashCooldown;
         
         
         private bool isDashing = false;
@@ -26,7 +27,7 @@ namespace Code.Scripts.Characters.Bubble
         private Vector3 dashVelocity;
         
         private float dashForce = 15f;
-        private float dashDuration = 0.2f; 
+        private float dashDuration = 0.8f; 
 
         private void Awake()
         {
@@ -53,8 +54,11 @@ namespace Code.Scripts.Characters.Bubble
             _movementDirection += BubbleCam.Instance.transform.right * horizontalMovement;
             _movementDirection.Normalize();
             _movementDirection.y = 0;
+            
+            if(_dashCooldown>0f)
+                _dashCooldown -= Time.deltaTime;
 
-            if (PlayerInputManager.Instance.moveAmount > 0.5f)
+            if (!isDashing && PlayerInputManager.Instance.moveAmount > 0.5f)
             {
                 Vector3 movementForce = new Vector3(_movementDirection.x, 0, _movementDirection.z) * movingSpeed;
                 _bubbleManager.rb.AddForce(movementForce, ForceMode.Force);
@@ -66,11 +70,13 @@ namespace Code.Scripts.Characters.Bubble
                     _bubbleManager.rb.linearVelocity = new Vector3(flatVelocity.x, _bubbleManager.rb.linearVelocity.y, flatVelocity.z);
                 }
             }
-            else
+            else if (!isDashing)
             {
                 Vector3 decelerationForce = new Vector3(_bubbleManager.rb.linearVelocity.x, 0, _bubbleManager.rb.linearVelocity.z) * -movingSpeed;
                 _bubbleManager.rb.AddForce(decelerationForce, ForceMode.Force);
+
             }
+
 
             
         }
@@ -94,7 +100,7 @@ namespace Code.Scripts.Characters.Bubble
 
         private void HandleDash()
         {
-            if (PlayerInputManager.Instance.dashInput && !isDashing)
+            if (PlayerInputManager.Instance.dashInput && !isDashing && _dashCooldown<=0f)
             {
                 PlayerInputManager.Instance.dashInput = false;
                 
@@ -111,6 +117,7 @@ namespace Code.Scripts.Characters.Bubble
             if (isDashing)
             {
                 PerformDash();
+                _dashCooldown = 1f;
             }
         }
 
@@ -118,15 +125,20 @@ namespace Code.Scripts.Characters.Bubble
         {
             if (dashTimeLeft > 0)
             {
-                _bubbleManager.rb.linearVelocity = new Vector3(dashVelocity.x, _bubbleManager.rb.linearVelocity.y, dashVelocity.z);
+                Vector3 currentVelocity = _bubbleManager.rb.linearVelocity;
+                
+                _bubbleManager.rb.linearVelocity = new Vector3(dashVelocity.x, currentVelocity.y, dashVelocity.z);
 
                 dashTimeLeft -= Time.fixedDeltaTime;
             }
             else
             {
                 isDashing = false;
-                _bubbleManager.rb.linearDamping = 1;
+                
+                _bubbleManager.rb.linearDamping = Mathf.Lerp(_bubbleManager.rb.linearDamping, 1, Time.fixedDeltaTime * 5);
             }
         }
+
+
     }
 }

@@ -14,6 +14,8 @@ namespace Code.Scripts.Characters.Bubble
             rb = GetComponent<Rigidbody>();
             locomotion = GetComponent<BubbleLocomotion>();
             
+            rb.freezeRotation = true;
+            
         }
 
         private void FixedUpdate()

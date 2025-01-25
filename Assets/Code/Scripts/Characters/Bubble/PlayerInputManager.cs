@@ -82,7 +82,6 @@ namespace Code.Scripts.Characters.Bubble
         {
             HandleMovementInput();
             HandleCameraMovementInput();
-            HandleInteractInput();
         }
 
         private void HandleMovementInput()
@@ -98,14 +97,7 @@ namespace Code.Scripts.Characters.Bubble
             cameraVerticalInput = cameraInput.y;
             cameraHorizontalInput = cameraInput.x;
         }
-
-        private void HandleInteractInput()
-        {
-            if (interactInput)
-            {
-                interactInput = false;
-            }
-        }
+        
         
     }
 }
