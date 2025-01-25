@@ -6,7 +6,7 @@ public class ObstacleData : ScriptableObject
 {
     public string obstacleName;
     public float pushForce;
-    public float damage;
-    public float health;
+    public int damage;
+    public int health;
 
 }

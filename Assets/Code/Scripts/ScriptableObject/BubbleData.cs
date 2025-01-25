@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "BubbleData", menuName = "Data/BubbleData")]
 class BubbleData : ScriptableObject
