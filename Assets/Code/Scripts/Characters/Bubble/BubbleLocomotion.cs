@@ -23,23 +23,32 @@ namespace Code.Scripts.Characters.Bubble
         private float _jumpCooldown;
         private float _jumpResistanceCd;
 
+        public Vector3 defaultPosition;
         
-        
+        [Header("States Settings")]
         private bool isDashing = false;
         private bool isJumping = false;
+        private bool isGrounded;
+        
+        
         private float dashTimeLeft = 0f;
         private float jumpTimeLeft = 0f;
         private Vector3 dashVelocity;
         private Vector3 jumpVelocity;
         
-        private float dashForce = 15f;
+        private float dashForce = 10f;
         private float dashDuration = 0.8f;
-        private float jumpForce = 15f;
+        private float jumpForce = 7.5f;
         private float jumpDuration = 0.8f;
 
         private void Awake()
         {
             _bubbleManager = GetComponent<BubbleManager>();
+        }
+
+        private void Start()
+        {
+            defaultPosition = transform.position;
         }
 
         private void GetAllMovements()
@@ -54,7 +63,6 @@ namespace Code.Scripts.Characters.Bubble
             HandleRotations();
             HandleDash();
             HandleJump();
-
         }
 
         private void HandleGroundedMovement()
@@ -83,10 +91,7 @@ namespace Code.Scripts.Characters.Bubble
             {
                 Vector3 decelerationForce = new Vector3(_bubbleManager.rb.linearVelocity.x, 0, _bubbleManager.rb.linearVelocity.z) * -movingSpeed;
                 _bubbleManager.rb.AddForce(decelerationForce, ForceMode.Force);
-
             }
-
-
             
         }
 
@@ -180,25 +185,25 @@ namespace Code.Scripts.Characters.Bubble
             Vector3 currentVelocity = _bubbleManager.rb.linearVelocity;
             _bubbleManager.rb.linearVelocity = new Vector3(currentVelocity.x, jumpVelocity.y, currentVelocity.z);
 
-            
-
-           
-
             Debug.Log("dumping change value  " + _bubbleManager.rb.linearDamping);
         }
-        private bool isGrounded;
+
 
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.CompareTag("Ground") &&  isJumping == true ) // Ensure the ground has the "Ground" tag
             {
-                
                 isGrounded = true;
                 isJumping = false;
                 Debug.Log("velocity  thenya" + _bubbleManager.rb.linearVelocity.y);
                 _bubbleManager.rb.linearDamping = 0; 
               
             }
+        }
+
+        public void RestNow()
+        {
+            transform.position = defaultPosition;
         }
 
 

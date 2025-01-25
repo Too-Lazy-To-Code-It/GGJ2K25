@@ -26,7 +26,7 @@ namespace Code.Scripts.Characters.Bubble
 
 
         [Header("Character Actions")] 
-        [SerializeField] private bool interactInput;
+        [SerializeField] public bool interactInput;
          public bool dashInput;
          public bool jumpInput;
 
@@ -63,6 +63,7 @@ namespace Code.Scripts.Characters.Bubble
                 _playerInput.Camera.CameraMoving.performed += i => cameraInput = i.ReadValue<Vector2>();
                 _playerInput.PlayerAction.Dash.performed += i => dashInput = true;
                 _playerInput.PlayerAction.Jump.performed += i => jumpInput = true;
+                _playerInput.PlayerAction.Interact.performed += i => interactInput = true;
             }
 
             _playerInput.Enable();
@@ -97,6 +98,8 @@ namespace Code.Scripts.Characters.Bubble
             cameraVerticalInput = cameraInput.y;
             cameraHorizontalInput = cameraInput.x;
         }
+
+
         
         
     }

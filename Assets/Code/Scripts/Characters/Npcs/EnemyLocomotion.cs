@@ -7,11 +7,12 @@ namespace Code.Scripts.Characters.Npcs
 {
     public class EnemyLocomotion : MonoBehaviour
     {
-        private float _roamRadius=10f;
+        private float _roamRadius=15f;
         private float _idleTime = 1f;
         
         private NavMeshAgent _agent;
         private float _idleTimer;
+        private Transform _target;
 
         private void Awake()
         {
