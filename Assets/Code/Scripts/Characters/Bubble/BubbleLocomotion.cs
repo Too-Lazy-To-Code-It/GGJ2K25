@@ -206,7 +206,7 @@ namespace Code.Scripts.Characters.Bubble
                 isGrounded = true;
                 isJumping = false;
                 Debug.Log("velocity  thenya" + _bubbleManager.rb.linearVelocity.y);
-                if (_bubbleManager.rb.linearVelocity.y > 5 && _bubbleManager.rb.linearVelocity.y < 4)
+                if (_bubbleManager.rb.linearVelocity.y > 5 || _bubbleManager.rb.linearVelocity.y < 4)
                 {
                     _bubbleManager.rb.linearVelocity = new Vector3(0,5f,0) ;
                 }
