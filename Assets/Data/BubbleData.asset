@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentState: 0
   score: 0
-  HasItem: 0
-  heartLevel: 0
+  hasItem: 0
+  heartLevel: 1

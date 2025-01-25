@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
-[CreateAssetMenu(fileName = "BubbleData", menuName = "Scriptable Objects/BubbleData")]
+[CreateAssetMenu(fileName = "BubbleData", menuName = "Data/BubbleData")]
 class BubbleData : ScriptableObject
 {
     public enum BubbleState
@@ -15,18 +16,10 @@ class BubbleData : ScriptableObject
     [Header("Bubble State")]
     public BubbleState currentState = BubbleState.Idle;
     public int score;
-    public bool HasItem;
+    public bool hasItem;
 
     [Header("Heart Level")]
     [Range(0, 2)] 
     public int heartLevel;
-
-
-    public void ResetData()
-    {
-        currentState = BubbleState.Idle;
-        score = 0;
-        HasItem = false;
-        heartLevel = 1;
-    }
+    
 }
