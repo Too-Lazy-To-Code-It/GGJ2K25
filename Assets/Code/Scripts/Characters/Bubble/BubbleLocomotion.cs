@@ -114,18 +114,23 @@ namespace Code.Scripts.Characters.Bubble
 
         private void HandleDash()
         {
-            if (PlayerInputManager.Instance.dashInput && !isDashing && _dashCooldown<=0f)
+            if (PlayerInputManager.Instance.dashInput  )
             {
                 PlayerInputManager.Instance.dashInput = false;
+                if (!isDashing && _dashCooldown<=0f)
+                {
+                   
                 
-                isDashing = true;
-                dashTimeLeft = dashDuration;
+                    isDashing = true;
+                    dashTimeLeft = dashDuration;
                 
-                Vector3 dashDirection = new Vector3(_movementDirection.x, 0, _movementDirection.z).normalized;
-                dashVelocity = dashDirection * dashForce;
+                    Vector3 dashDirection = new Vector3(_movementDirection.x, 0, _movementDirection.z).normalized;
+                    dashVelocity = dashDirection * dashForce;
 
 
-                _bubbleManager.rb.linearDamping = 0;
+                    _bubbleManager.rb.linearDamping = 0;
+                }
+               
             }
             
             if (isDashing)
@@ -154,23 +159,28 @@ namespace Code.Scripts.Characters.Bubble
         }
         private void HandleJump()
         {
-            if (PlayerInputManager.Instance.jumpInput && !isJumping && _jumpCooldown <= 0f)
+            if (PlayerInputManager.Instance.jumpInput  )
             {
-                Debug.Log("dumping original value: " + _bubbleManager.rb.linearDamping);
-                Debug.Log("Jump initiated.");
-
-                _jumpCooldown = 3f; // Reset jump cooldown
-                _jumpResistanceCd = 5f;
                 PlayerInputManager.Instance.jumpInput = false;
+                if (!isJumping && _jumpCooldown <= 0f)
+                {
+                    
+                    Debug.Log("dumping original value: " + _bubbleManager.rb.linearDamping);
+                    Debug.Log("Jump initiated.");
 
-                isJumping = true;
-                isGrounded = false; 
-                _bubbleManager.rb.linearDamping = 1; 
-                jumpTimeLeft = jumpDuration;
-                jumpVelocity = Vector3.up * jumpForce;
+                    _jumpCooldown = 3f; // Reset jump cooldown
+                    _jumpResistanceCd = 5f;
 
-               
-                PerformJump();
+
+                    isJumping = true;
+                    isGrounded = false;
+                    _bubbleManager.rb.linearDamping = 1;
+                    jumpTimeLeft = jumpDuration;
+                    jumpVelocity = Vector3.up * jumpForce;
+
+
+                    PerformJump();
+                }
             }
 
             if (_jumpCooldown > 0f)
