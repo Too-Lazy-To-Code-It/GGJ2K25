@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -18,6 +19,14 @@ namespace Code.Scripts.Characters.Bubble
         [SerializeField] private float movingSpeed=5f;
         [SerializeField] private float maximumSpeed = 4.5f;
         [SerializeField] private float rotationSpeed = 20f;
+        
+        
+        private bool isDashing = false;
+        private float dashTimeLeft = 0f;
+        private Vector3 dashVelocity;
+        
+        private float dashForce = 15f;
+        private float dashDuration = 0.2f; 
 
         private void Awake()
         {
@@ -34,6 +43,7 @@ namespace Code.Scripts.Characters.Bubble
         {
             HandleGroundedMovement();
             HandleRotations();
+            HandleDash();
 
         }
 
@@ -46,20 +56,23 @@ namespace Code.Scripts.Characters.Bubble
 
             if (PlayerInputManager.Instance.moveAmount > 0.5f)
             {
-                Vector3 horizontal= Vector3.ProjectOnPlane(_movementDirection, Vector3.up);
-                _bubbleManager.rb.AddForce(horizontal * movingSpeed, ForceMode.Force);
-    
-                if (_bubbleManager.rb.linearVelocity.magnitude > maximumSpeed)
+                Vector3 movementForce = new Vector3(_movementDirection.x, 0, _movementDirection.z) * movingSpeed;
+                _bubbleManager.rb.AddForce(movementForce, ForceMode.Force);
+
+                Vector3 flatVelocity = new Vector3(_bubbleManager.rb.linearVelocity.x, 0, _bubbleManager.rb.linearVelocity.z);
+                if (flatVelocity.magnitude > maximumSpeed)
                 {
-                    Vector3 clampedVelocity = _bubbleManager.rb.linearVelocity.normalized * maximumSpeed;
-                    _bubbleManager.rb.linearVelocity = new Vector3(clampedVelocity.x, _bubbleManager.rb.linearVelocity.y, clampedVelocity.z);
+                    flatVelocity = flatVelocity.normalized * maximumSpeed;
+                    _bubbleManager.rb.linearVelocity = new Vector3(flatVelocity.x, _bubbleManager.rb.linearVelocity.y, flatVelocity.z);
                 }
             }
-            else 
+            else
             {
-                Vector3 horizontalDrag = Vector3.ProjectOnPlane(_bubbleManager.rb.linearVelocity, Vector3.up);
-                _bubbleManager.rb.AddForce(-horizontalDrag * movingSpeed, ForceMode.Force);
+                Vector3 decelerationForce = new Vector3(_bubbleManager.rb.linearVelocity.x, 0, _bubbleManager.rb.linearVelocity.z) * -movingSpeed;
+                _bubbleManager.rb.AddForce(decelerationForce, ForceMode.Force);
             }
+
+            
         }
 
         private void HandleRotations()
@@ -77,6 +90,43 @@ namespace Code.Scripts.Characters.Bubble
                 Quaternion.Slerp(transform.rotation, newRotation, rotationSpeed * Time.deltaTime);
             transform.rotation = targetRotation;
             
+        }
+
+        private void HandleDash()
+        {
+            if (PlayerInputManager.Instance.dashInput && !isDashing)
+            {
+                PlayerInputManager.Instance.dashInput = false;
+                
+                isDashing = true;
+                dashTimeLeft = dashDuration;
+                
+                Vector3 dashDirection = new Vector3(_movementDirection.x, 0, _movementDirection.z).normalized;
+                dashVelocity = dashDirection * dashForce;
+
+
+                _bubbleManager.rb.linearDamping = 0;
+            }
+            
+            if (isDashing)
+            {
+                PerformDash();
+            }
+        }
+
+        private void PerformDash()
+        {
+            if (dashTimeLeft > 0)
+            {
+                _bubbleManager.rb.linearVelocity = new Vector3(dashVelocity.x, _bubbleManager.rb.linearVelocity.y, dashVelocity.z);
+
+                dashTimeLeft -= Time.fixedDeltaTime;
+            }
+            else
+            {
+                isDashing = false;
+                _bubbleManager.rb.linearDamping = 1;
+            }
         }
     }
 }
