@@ -8,6 +8,7 @@ namespace Code.Scripts.Characters.Bubble
     {
         [HideInInspector]public Rigidbody rb;
         [HideInInspector]public BubbleLocomotion locomotion;
+        //public BubbleData bubbleData;
         protected override void Awake()
         {
             base.Awake();

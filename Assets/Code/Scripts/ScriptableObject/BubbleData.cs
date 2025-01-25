@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BubbleData", menuName = "Data/BubbleData")]
-class BubbleData : ScriptableObject
+public class BubbleData : ScriptableObject
 {
     public enum BubbleState
     {
