@@ -29,6 +29,7 @@ namespace Code.Scripts.Characters.Bubble
         [SerializeField] public bool interactInput;
          public bool dashInput;
          public bool jumpInput;
+         public bool shootInput;
 
 
         private void Awake()
@@ -64,6 +65,7 @@ namespace Code.Scripts.Characters.Bubble
                 _playerInput.PlayerAction.Dash.performed += i => dashInput = true;
                 _playerInput.PlayerAction.Jump.performed += i => jumpInput = true;
                 _playerInput.PlayerAction.Interact.performed += i => interactInput = true;
+                _playerInput.PlayerAction.Shoot.performed += i => shootInput = true;
             }
 
             _playerInput.Enable();

@@ -6,14 +6,15 @@ namespace Code.Scripts.Characters.Npcs
 {
     public class EnemyManager : MonoBehaviour
     {
-        //public EnemyData enemyData;
+        public EnemyData enemyData;
         private EnemyAction _enemyAction;
         private EnemyLocomotion _enemyLocomotion;
 
         private void Awake()
         {
-            //_enemyAction = GetComponent<EnemyAction>();
+            _enemyAction = GetComponent<EnemyAction>();
             _enemyLocomotion = GetComponent<EnemyLocomotion>();
+            enemyData.state = State.Idle;
         }
 
         private void Update()
