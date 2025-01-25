@@ -201,11 +201,16 @@ namespace Code.Scripts.Characters.Bubble
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.CompareTag("Ground") &&  isJumping == true ) // Ensure the ground has the "Ground" tag
+            if (collision.gameObject.CompareTag("Ground") ) // Ensure the ground has the "Ground" tag
             {
                 isGrounded = true;
                 isJumping = false;
                 Debug.Log("velocity  thenya" + _bubbleManager.rb.linearVelocity.y);
+                if (_bubbleManager.rb.linearVelocity.y > 8)
+                {
+                    _bubbleManager.rb.linearVelocity = new Vector3(0,8f,0) ;
+                }
+               
                 _bubbleManager.rb.linearDamping = 0; 
               
             }
