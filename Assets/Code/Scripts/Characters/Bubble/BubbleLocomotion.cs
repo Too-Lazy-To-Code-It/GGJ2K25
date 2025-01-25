@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Code.Scripts.Characters.Bubble
 {
@@ -14,7 +15,8 @@ namespace Code.Scripts.Characters.Bubble
         [Header("Movement Settings")] 
         private Vector3 _targetRotationDirection;
         private Vector3 _movementDirection;
-        [SerializeField] private float movingSpeed=5.5f;
+        [SerializeField] private float movingSpeed=5f;
+        [SerializeField] private float maximumSpeed = 4.5f;
         [SerializeField] private float rotationSpeed = 20f;
 
         private void Awake()
@@ -44,11 +46,20 @@ namespace Code.Scripts.Characters.Bubble
 
             if (PlayerInputManager.Instance.moveAmount > 0.5f)
             {
-                Vector3 movePosition=_bubbleManager.rb.position + _movementDirection *(movingSpeed * Time.fixedDeltaTime);
-                _bubbleManager.rb.MovePosition(movePosition);
+                Vector3 horizontal= Vector3.ProjectOnPlane(_movementDirection, Vector3.up);
+                _bubbleManager.rb.AddForce(horizontal * movingSpeed, ForceMode.Force);
+    
+                if (_bubbleManager.rb.linearVelocity.magnitude > maximumSpeed)
+                {
+                    Vector3 clampedVelocity = _bubbleManager.rb.linearVelocity.normalized * maximumSpeed;
+                    _bubbleManager.rb.linearVelocity = new Vector3(clampedVelocity.x, _bubbleManager.rb.linearVelocity.y, clampedVelocity.z);
+                }
             }
-
-            
+            else 
+            {
+                Vector3 horizontalDrag = Vector3.ProjectOnPlane(_bubbleManager.rb.linearVelocity, Vector3.up);
+                _bubbleManager.rb.AddForce(-horizontalDrag * movingSpeed, ForceMode.Force);
+            }
         }
 
         private void HandleRotations()
