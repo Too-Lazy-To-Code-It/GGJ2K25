@@ -242,10 +242,10 @@ namespace Code.Scripts.Characters.Bubble
             { PlayerInputManager.Instance.shootInput = false;
                 if (_bubbleManager.bubbleData.item)
                 {
-                   
+                    Vector3 forwardDirection = transform.forward;
                     _bubbleManager.bubbleData.item.GetComponent<ItemManager>().transform.position = PositionShooting.position;
                     _bubbleManager.bubbleData.item.GetComponent<ItemManager>().transform.rotation = PositionShooting.rotation;
-                    _bubbleManager.bubbleData.item.GetComponent<ItemManager>().ShootItem(new Vector3(_movementDirection.x,0,_movementDirection.y) , 10f);
+                    _bubbleManager.bubbleData.item.GetComponent<ItemManager>().ShootItem(forwardDirection , 25f);
 
                     _bubbleManager.bubbleData.item = null;
                 }

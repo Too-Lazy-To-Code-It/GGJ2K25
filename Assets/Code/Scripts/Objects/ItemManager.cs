@@ -19,8 +19,7 @@ namespace Code.Scripts.Objects
                 if (!bubbleManager.bubbleData.item  )
                 {
                     
-                   // if(gameObject.GetComponent<Rigidbody>())
-                   //     Destroy(gameObject.GetComponent<Rigidbody>());
+                 
                     bubbleManager.bubbleData.item = gameObject;
                     _currentBubbleManager = bubbleManager;
                     _absorbTransform = other.gameObject.transform.Find("Absorb");
