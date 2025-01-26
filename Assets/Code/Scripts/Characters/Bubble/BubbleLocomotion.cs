@@ -9,6 +9,7 @@ namespace Code.Scripts.Characters.Bubble
     public class BubbleLocomotion : CharacterLocomotion
     {
         private BubbleManager _bubbleManager;
+        public AudioSource audioSource;
         
         [HideInInspector]public float verticalMovement;
         [HideInInspector]public float horizontalMovement;
@@ -242,9 +243,11 @@ namespace Code.Scripts.Characters.Bubble
             { PlayerInputManager.Instance.shootInput = false;
                 if (_bubbleManager.bubbleData.item)
                 {
+                    
                     Vector3 forwardDirection = transform.forward;
                     _bubbleManager.bubbleData.item.GetComponent<ItemManager>().transform.position = PositionShooting.position;
                     _bubbleManager.bubbleData.item.GetComponent<ItemManager>().transform.rotation = PositionShooting.rotation;
+                    audioSource.Play();
                     _bubbleManager.bubbleData.item.GetComponent<ItemManager>().ShootItem(forwardDirection , 25f);
 
                     _bubbleManager.bubbleData.item = null;
