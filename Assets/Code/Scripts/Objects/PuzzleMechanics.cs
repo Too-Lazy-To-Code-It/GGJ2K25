@@ -6,6 +6,7 @@ public class PuzzleMechanics : MonoBehaviour
     [SerializeField] GameObject PlatformTatla3;
     public float speed = 2f;       // Speed of movement
     private bool shouldMove = false;
+    public float upLimit;
     Vector3 targetPosition; // Flag to control when the object should move
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -26,7 +27,7 @@ public class PuzzleMechanics : MonoBehaviour
             {
                 shouldMove = false; // Stop moving
                 Debug.Log("Reached the target position!");
-                Destroy(this);
+                Destroy(this.gameObject);
             }
         }
     }
@@ -34,7 +35,7 @@ public class PuzzleMechanics : MonoBehaviour
     public void PlatformUp(float _newPosition)
     {
         Debug.Log("Target Hit!!");
-        Vector3 newPosition = new Vector3(PlatformTatla3.transform.position.x, PlatformTatla3.transform.position.y + 2f, PlatformTatla3.transform.position.z);
+        Vector3 newPosition = new Vector3(PlatformTatla3.transform.position.x, PlatformTatla3.transform.position.y + upLimit, PlatformTatla3.transform.position.z);
        
         targetPosition = newPosition;
         shouldMove = true;
