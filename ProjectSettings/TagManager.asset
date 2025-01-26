@@ -10,6 +10,7 @@ TagManager:
   - Soap
   - Bucket
   - Ground
+  - Target
   layers:
   - Default
   - TransparentFX
