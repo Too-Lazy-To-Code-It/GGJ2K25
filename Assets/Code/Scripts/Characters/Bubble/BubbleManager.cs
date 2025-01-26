@@ -17,9 +17,10 @@ namespace Code.Scripts.Characters.Bubble
             rb = GetComponent<Rigidbody>();
             locomotion = GetComponent<BubbleLocomotion>();
             audioSource = GetComponent<AudioSource>();
-            
+            bubbleData.heartLevel = 1;
             bubbleData.item = null;
             rb.freezeRotation = true;
+            
             
         }
 
@@ -27,7 +28,7 @@ namespace Code.Scripts.Characters.Bubble
         {
             if (bubbleData.heartLevel <= 0)
             {
-               // audioSource.Play();
+               audioSource.Play();
                 gameObject.SetActive(false);
             }
 

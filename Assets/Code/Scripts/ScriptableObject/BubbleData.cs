@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BubbleData", menuName = "Data/BubbleData")]
@@ -20,5 +21,6 @@ public class BubbleData : ScriptableObject
     [Header("Heart Level")]
     [Range(0, 2)] 
     public int heartLevel;
-    
+
+   
 }
