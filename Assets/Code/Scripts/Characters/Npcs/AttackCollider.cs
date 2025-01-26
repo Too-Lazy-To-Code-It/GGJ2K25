@@ -8,7 +8,7 @@ namespace Code.Scripts.Characters.Npcs
         {
             if (other.CompareTag("Player"))
             {
-                Destroy(other.gameObject);
+                other.gameObject.SetActive(false);
             }
         }
     }
