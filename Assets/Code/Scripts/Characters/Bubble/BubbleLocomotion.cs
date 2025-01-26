@@ -167,13 +167,8 @@ namespace Code.Scripts.Characters.Bubble
                 PlayerInputManager.Instance.jumpInput = false;
                 if (!isJumping && _jumpCooldown <= 0f)
                 {
-                    
-                    Debug.Log("dumping original value: " + _bubbleManager.rb.linearDamping);
-                    Debug.Log("Jump initiated.");
-
                     _jumpCooldown = 3f; // Reset jump cooldown
                     _jumpResistanceCd = 5f;
-
 
                     isJumping = true;
                     isGrounded = false;
@@ -197,19 +192,13 @@ namespace Code.Scripts.Characters.Bubble
         {
             Vector3 currentVelocity = _bubbleManager.rb.linearVelocity;
             _bubbleManager.rb.linearVelocity = new Vector3(currentVelocity.x, jumpVelocity.y, currentVelocity.z);
-
-            Debug.Log("dumping change value  " + _bubbleManager.rb.linearDamping);
         }
 
 
         private void OnCollisionEnter(Collision collision)
         {
-            // Ensure the ground has the "Ground" tag
-           
-            
                 isGrounded = true;
                 isJumping = false;
-                Debug.Log("velocity  thenya" + _bubbleManager.rb.linearVelocity.y);
                 if (_bubbleManager.rb.linearVelocity.y > 5 || _bubbleManager.rb.linearVelocity.y < 4)
                 {
                     _bubbleManager.rb.linearVelocity = new Vector3(0,5f,0) ;
@@ -220,15 +209,10 @@ namespace Code.Scripts.Characters.Bubble
 
             if (collision.gameObject.CompareTag("Obstacle"))
             {
-                
                 Vector3 currentVelocity = _bubbleManager.rb.linearVelocity;
                 
                 _bubbleManager.rb.linearVelocity = new Vector3(dashVelocity.x * 3, currentVelocity.y * 3, dashVelocity.z * 3);
-
-               
             }
-              
-            
         }
 
         public void RestNow()
