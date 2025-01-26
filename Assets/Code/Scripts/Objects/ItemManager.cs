@@ -1,5 +1,6 @@
 ﻿using Code.Scripts.Characters.Bubble;
 using Code.Scripts.ScriptableObject;
+using System.Collections;
 using UnityEngine;
 
 namespace Code.Scripts.Objects
@@ -8,8 +9,19 @@ namespace Code.Scripts.Objects
     {
         ItemData _itemData;
         private Transform _absorbTransform;
-        private BubbleManager _currentBubbleManager; 
-        
+        private BubbleManager _currentBubbleManager;
+
+        private Vector3 initialPosition;  // Initial position of the object
+        private Quaternion initialRotation; // Initial rotation of the object
+
+        private void Start()
+        {
+
+                initialPosition = this.transform.position;
+                initialRotation = this.transform.rotation;
+            
+        }
+
         private void OnCollisionEnter(Collision other)
         {
             if (!(other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Enemy"))) return;
@@ -28,13 +40,13 @@ namespace Code.Scripts.Objects
                 }
             }
 
-            if (other.gameObject.CompareTag("Enemy"))
-                Destroy(other.gameObject);
-            
-            
-            
 
+            if (other.gameObject.CompareTag("Enemy"))
+            {
+                Destroy(other.gameObject);
                 
+            }
+
         }
 
         public void ShootItem(Vector3 direction, float force)
@@ -55,8 +67,29 @@ namespace Code.Scripts.Objects
             {
                 other.gameObject.transform.parent.gameObject.GetComponent<PuzzleMechanics>().PlatformUp(other.transform.position.y);
 
-                Destroy(this.gameObject);
+                Respawn();
             }
+
+            if (other.gameObject.CompareTag("Respawn"))
+            {
+                Respawn();
+                Destroy(this.gameObject);
+                Debug.Log("Respawning the box");
+            }
+        }
+
+        void Respawn()
+        {
+            //this.gameObject.transform.position = initialPosition;
+            //this.gameObject.transform.rotation = initialRotation;
+
+            GameObject _GO = Instantiate(this.gameObject, initialPosition, initialRotation);
+            Rigidbody _r = _GO.GetComponent<Rigidbody>();
+            Destroy(_r);
+
+
+
+
         }
 
     }

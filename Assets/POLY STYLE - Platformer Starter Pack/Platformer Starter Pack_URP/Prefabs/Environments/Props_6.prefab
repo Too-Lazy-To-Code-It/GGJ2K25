@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc2419f003e442fa6185907544ab2f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectToRespawn: {fileID: 5741591184186878543}
 --- !u!65 &2015638385421724025
 BoxCollider:
   m_ObjectHideFlags: 0
