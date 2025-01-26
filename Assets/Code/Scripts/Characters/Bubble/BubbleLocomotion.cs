@@ -20,20 +20,20 @@ namespace Code.Scripts.Characters.Bubble
         [SerializeField] private float movingSpeed=5f;
         [SerializeField] private float maximumSpeed = 4.5f;
         [SerializeField] private float rotationSpeed = 20f;
-        private float _dashCooldown;
-        private float _jumpCooldown;
+        public float _dashCooldown;
+        public float _jumpCooldown;
         private float _jumpResistanceCd;
 
         public Vector3 defaultPosition;
         public Transform PositionShooting;
         [Header("States Settings")]
-        private bool isDashing = false;
-        private bool isJumping = false;
+        public bool isDashing = false;
+        public bool isJumping = false;
         private bool isGrounded;
         
         
-        private float dashTimeLeft = 0f;
-        private float jumpTimeLeft = 0f;
+        public float dashTimeLeft = 0f;
+        public float jumpTimeLeft = 0f;
         private Vector3 dashVelocity;
         private Vector3 jumpVelocity;
         
@@ -209,7 +209,7 @@ namespace Code.Scripts.Characters.Bubble
             
                 isGrounded = true;
                 isJumping = false;
-                Debug.Log("velocity  thenya" + _bubbleManager.rb.linearVelocity.y);
+                //Debug.Log("velocity  thenya" + _bubbleManager.rb.linearVelocity.y);
                 if (_bubbleManager.rb.linearVelocity.y > 5 || _bubbleManager.rb.linearVelocity.y < 4)
                 {
                     _bubbleManager.rb.linearVelocity = new Vector3(0,5f,0) ;

@@ -32,6 +32,11 @@ namespace Code.Scripts.Objects
 
             if (other.gameObject.CompareTag("Enemy"))
                 Destroy(other.gameObject);
+            
+            
+            
+
+                
         }
 
         public void ShootItem(Vector3 direction, float force)
@@ -44,6 +49,16 @@ namespace Code.Scripts.Objects
                 rb = gameObject.AddComponent<Rigidbody>();
             }
             rb.AddForce(direction * force, ForceMode.Impulse);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("Target"))
+            {
+                other.gameObject.transform.parent.gameObject.GetComponent<PuzzleMechanics>().PlatformUp(other.transform.position.y);
+
+                Destroy(this.gameObject);
+            }
         }
 
     }
