@@ -11,6 +11,7 @@ TagManager:
   - Bucket
   - Ground
   - Target
+  - Trap
   layers:
   - Default
   - TransparentFX
