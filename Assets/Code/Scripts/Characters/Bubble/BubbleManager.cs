@@ -27,7 +27,7 @@ namespace Code.Scripts.Characters.Bubble
         {
             if (bubbleData.heartLevel <= 0)
             {
-                audioSource.Play();
+               // audioSource.Play();
                 gameObject.SetActive(false);
             }
 

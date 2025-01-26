@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Code.Scripts.Characters.Bubble;
+using UnityEngine;
 
 namespace Code.Scripts.Characters.Npcs
 {
@@ -8,7 +9,7 @@ namespace Code.Scripts.Characters.Npcs
         {
             if (other.CompareTag("Player"))
             {
-                other.gameObject.GetComponent<BubbleData>().heartLevel--;
+                other.gameObject.GetComponent<BubbleManager>().bubbleData.heartLevel--;
             }
         }
     }
