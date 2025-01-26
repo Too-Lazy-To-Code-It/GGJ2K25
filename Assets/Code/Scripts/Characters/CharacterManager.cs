@@ -5,6 +5,7 @@ namespace Code.Scripts.Characters
 {
     public class CharacterManager : MonoBehaviour
     {
+        
         private void OnCollisionEnter(Collision other)
         {
             if (other.gameObject.CompareTag("Player"))
@@ -13,7 +14,8 @@ namespace Code.Scripts.Characters
             }
             if (other.gameObject.CompareTag("Trap"))
             {
-                other.gameObject.GetComponent<BubbleData>().heartLevel--;
+                Debug.Log("esfjsedfjsdlfjosdjfosod");
+                gameObject.GetComponent<BubbleData>().heartLevel--;
                 if (other.gameObject.GetComponent<BubbleData>().heartLevel <= 0)
                 {
                     Debug.Log("Game Over Screen");

@@ -9,11 +9,15 @@ namespace Code.Scripts.Characters.Bubble
         [HideInInspector]public Rigidbody rb;
         [HideInInspector]public BubbleLocomotion locomotion;
         public BubbleData bubbleData;
+        public AudioSource audioSource;
+
         protected override void Awake()
         {
             base.Awake();
             rb = GetComponent<Rigidbody>();
             locomotion = GetComponent<BubbleLocomotion>();
+            audioSource = GetComponent<AudioSource>();
+            
             bubbleData.item = null;
             rb.freezeRotation = true;
             
@@ -21,10 +25,15 @@ namespace Code.Scripts.Characters.Bubble
 
         private void Update()
         {
-            if(bubbleData.heartLevel<=0)
+            if (bubbleData.heartLevel <= 0)
+            {
+                audioSource.Play();
                 gameObject.SetActive(false);
+            }
+
             if (PlayerInputManager.Instance.interactInput)
             {
+                
                 PlayerInputManager.Instance.interactInput = false;
                 locomotion.RestNow();
             }
