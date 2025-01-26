@@ -205,8 +205,8 @@ namespace Code.Scripts.Characters.Bubble
         private void OnCollisionEnter(Collision collision)
         {
             // Ensure the ground has the "Ground" tag
-            if (!collision.gameObject.CompareTag("Ground"))
-            {
+           
+            
                 isGrounded = true;
                 isJumping = false;
                 Debug.Log("velocity  thenya" + _bubbleManager.rb.linearVelocity.y);
@@ -216,14 +216,14 @@ namespace Code.Scripts.Characters.Bubble
                 }
                
                 _bubbleManager.rb.linearDamping = 0; 
-            }
+            
 
             if (collision.gameObject.CompareTag("Ground"))
             {
                 
                 Vector3 currentVelocity = _bubbleManager.rb.linearVelocity;
                 
-                _bubbleManager.rb.linearVelocity = new Vector3(dashVelocity.x, currentVelocity.y, dashVelocity.z);
+                _bubbleManager.rb.linearVelocity = new Vector3(dashVelocity.x * 3, currentVelocity.y * 3, dashVelocity.z * 3);
 
                
             }

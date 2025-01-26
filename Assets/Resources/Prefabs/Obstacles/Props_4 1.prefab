@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4679841898955525517}
   - component: {fileID: 2736523445153463165}
   m_Layer: 0
-  m_Name: Props_4
+  m_Name: Props_4 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,7 +100,8 @@ GameObject:
   - component: {fileID: 5847300028950260507}
   - component: {fileID: 5907741347030846902}
   - component: {fileID: 2904593087290849882}
-  - component: {fileID: 8705148179220803164}
+  - component: {fileID: 8378781004265647321}
+  - component: {fileID: 6139491769533521844}
   m_Layer: 0
   m_Name: Props_4a
   m_TagString: Untagged
@@ -180,7 +181,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &8705148179220803164
+--- !u!114 &8378781004265647321
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -195,3 +196,24 @@ MonoBehaviour:
   scaleMin: 0
   scaleMax: 1.5
   speed: 2
+--- !u!65 &6139491769533521844
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8122050685830729847}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.8908615, y: 2.4513595, z: 2.8908615}
+  m_Center: {x: -1.993561e-23, y: 1.2050337, z: 1.5948488e-23}
