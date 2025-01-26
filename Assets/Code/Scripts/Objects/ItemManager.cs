@@ -38,6 +38,7 @@ namespace Code.Scripts.Objects
                     gameObject.transform.SetParent(_absorbTransform);
                     gameObject.transform.localPosition = Vector3.zero;
                     gameObject.transform.localRotation = Quaternion.identity;
+                    gameObject.transform.localScale = Vector3.one;
                      
                 }
             }
