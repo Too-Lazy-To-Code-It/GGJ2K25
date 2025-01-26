@@ -11,6 +11,16 @@ namespace Code.Scripts.Characters
             {
                 Debug.Log("Merge Happening here");
             }
+            if (other.gameObject.CompareTag("Trap"))
+            {
+                other.gameObject.GetComponent<BubbleData>().heartLevel--;
+                if (other.gameObject.GetComponent<BubbleData>().heartLevel <= 0)
+                {
+                    Debug.Log("Game Over Screen");
+                }
+
+                
+            }
         }
 
         protected virtual void Awake()

@@ -8,7 +8,7 @@ namespace Code.Scripts.Characters.Bubble
         public static PlayerInputManager Instance;
 
         public BubbleManager player;
-
+      
         private PlayerInput _playerInput;
 
         [SerializeField] public Vector2 movementInput;
