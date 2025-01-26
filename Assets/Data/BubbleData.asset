@@ -15,4 +15,4 @@ MonoBehaviour:
   currentState: 0
   score: 0
   item: {fileID: 0}
-  heartLevel: 0
+  heartLevel: 1
