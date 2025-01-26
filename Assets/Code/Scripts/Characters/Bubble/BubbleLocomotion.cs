@@ -20,20 +20,20 @@ namespace Code.Scripts.Characters.Bubble
         [SerializeField] private float movingSpeed=5f;
         [SerializeField] private float maximumSpeed = 4.5f;
         [SerializeField] private float rotationSpeed = 20f;
-        private float _dashCooldown;
-        private float _jumpCooldown;
+        public float _dashCooldown;
+        public float _jumpCooldown;
         private float _jumpResistanceCd;
 
         public Vector3 defaultPosition;
         public Transform PositionShooting;
         [Header("States Settings")]
-        private bool isDashing = false;
-        private bool isJumping = false;
+        public bool isDashing = false;
+        public bool isJumping = false;
         private bool isGrounded;
         
         
-        private float dashTimeLeft = 0f;
-        private float jumpTimeLeft = 0f;
+        public float dashTimeLeft = 0f;
+        public float jumpTimeLeft = 0f;
         private Vector3 dashVelocity;
         private Vector3 jumpVelocity;
         
@@ -167,8 +167,13 @@ namespace Code.Scripts.Characters.Bubble
                 PlayerInputManager.Instance.jumpInput = false;
                 if (!isJumping && _jumpCooldown <= 0f)
                 {
+                    
+                    Debug.Log("dumping original value: " + _bubbleManager.rb.linearDamping);
+                    Debug.Log("Jump initiated.");
+
                     _jumpCooldown = 3f; // Reset jump cooldown
                     _jumpResistanceCd = 5f;
+
 
                     isJumping = true;
                     isGrounded = false;
@@ -192,13 +197,19 @@ namespace Code.Scripts.Characters.Bubble
         {
             Vector3 currentVelocity = _bubbleManager.rb.linearVelocity;
             _bubbleManager.rb.linearVelocity = new Vector3(currentVelocity.x, jumpVelocity.y, currentVelocity.z);
+
+            Debug.Log("dumping change value  " + _bubbleManager.rb.linearDamping);
         }
 
 
         private void OnCollisionEnter(Collision collision)
         {
+            // Ensure the ground has the "Ground" tag
+           
+            
                 isGrounded = true;
                 isJumping = false;
+                //Debug.Log("velocity  thenya" + _bubbleManager.rb.linearVelocity.y);
                 if (_bubbleManager.rb.linearVelocity.y > 5 || _bubbleManager.rb.linearVelocity.y < 4)
                 {
                     _bubbleManager.rb.linearVelocity = new Vector3(0,5f,0) ;
@@ -209,10 +220,15 @@ namespace Code.Scripts.Characters.Bubble
 
             if (collision.gameObject.CompareTag("Obstacle"))
             {
+                
                 Vector3 currentVelocity = _bubbleManager.rb.linearVelocity;
                 
                 _bubbleManager.rb.linearVelocity = new Vector3(dashVelocity.x * 3, currentVelocity.y * 3, dashVelocity.z * 3);
+
+               
             }
+              
+            
         }
 
         public void RestNow()
