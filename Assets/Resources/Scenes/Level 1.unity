@@ -1607,6 +1607,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2015638385421724025, guid: bcdb601ee0e1144478b160e8530cefa2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5741591184186878543, guid: bcdb601ee0e1144478b160e8530cefa2, type: 3}
       propertyPath: m_Name
       value: Props_6
@@ -2605,6 +2609,10 @@ PrefabInstance:
     - target: {fileID: 2250676011529023172, guid: 335fe92a52bea6c42ba0969aa867c2ef, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2945544111452267818, guid: 335fe92a52bea6c42ba0969aa867c2ef, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.39
       objectReference: {fileID: 0}
     - target: {fileID: 9031061700131710387, guid: 335fe92a52bea6c42ba0969aa867c2ef, type: 3}
       propertyPath: m_Name
