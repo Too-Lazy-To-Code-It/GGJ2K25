@@ -39,6 +39,7 @@ namespace Code.Scripts.Characters.Bubble
         {
             DontDestroyOnLoad(this);
             _cameraZposition=cameraObject.transform.localPosition.z;
+
         }
 
         public void HandleAllCameraActions()
@@ -46,7 +47,7 @@ namespace Code.Scripts.Characters.Bubble
             if (!player) return;
             FollowPlayer();
             HandleRotations();
-            HandleCollisions();
+            //HandleCollisions();
         }
 
         public void FollowPlayer()
