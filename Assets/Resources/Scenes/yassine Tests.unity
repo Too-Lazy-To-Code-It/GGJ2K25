@@ -673,21 +673,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 242863851603009060, guid: 847f9179db0e03f4daf64f86aaf1e09a, type: 3}
-      propertyPath: speed
-      value: 250
-      objectReference: {fileID: 0}
-    - target: {fileID: 242863851603009060, guid: 847f9179db0e03f4daf64f86aaf1e09a, type: 3}
-      propertyPath: maxRotation
-      value: 90
-      objectReference: {fileID: 0}
     - target: {fileID: 5003257899507768075, guid: 847f9179db0e03f4daf64f86aaf1e09a, type: 3}
       propertyPath: m_Name
       value: CodedHammer
-      objectReference: {fileID: 0}
-    - target: {fileID: 5003257899507768075, guid: 847f9179db0e03f4daf64f86aaf1e09a, type: 3}
-      propertyPath: m_TagString
-      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 6768743221385502464, guid: 847f9179db0e03f4daf64f86aaf1e09a, type: 3}
       propertyPath: m_LocalPosition.x
