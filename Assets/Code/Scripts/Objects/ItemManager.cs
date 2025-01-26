@@ -19,8 +19,8 @@ namespace Code.Scripts.Objects
                 if (!bubbleManager.bubbleData.item  )
                 {
                     
-                    if(gameObject.GetComponent<Rigidbody>())
-                        Destroy(gameObject.GetComponent<Rigidbody>());
+                   // if(gameObject.GetComponent<Rigidbody>())
+                   //     Destroy(gameObject.GetComponent<Rigidbody>());
                     bubbleManager.bubbleData.item = gameObject;
                     _currentBubbleManager = bubbleManager;
                     _absorbTransform = other.gameObject.transform.Find("Absorb");
@@ -44,7 +44,7 @@ namespace Code.Scripts.Objects
             {
                 rb = gameObject.AddComponent<Rigidbody>();
             }
-            rb.AddRelativeForce(direction.normalized * force, ForceMode.Impulse);
+            rb.AddForce(direction * force, ForceMode.Impulse);
         }
 
     }

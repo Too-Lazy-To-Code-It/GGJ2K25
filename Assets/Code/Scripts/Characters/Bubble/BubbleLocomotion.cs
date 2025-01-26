@@ -25,7 +25,7 @@ namespace Code.Scripts.Characters.Bubble
         private float _jumpResistanceCd;
 
         public Vector3 defaultPosition;
-        
+        public Transform PositionShooting;
         [Header("States Settings")]
         private bool isDashing = false;
         private bool isJumping = false;
@@ -41,6 +41,7 @@ namespace Code.Scripts.Characters.Bubble
         private float dashDuration = 0.8f;
         private float jumpForce = 7.5f;
         private float jumpDuration = 0.8f;
+        
 
         private void Awake()
         {
@@ -176,7 +177,7 @@ namespace Code.Scripts.Characters.Bubble
 
                     isJumping = true;
                     isGrounded = false;
-                    _bubbleManager.rb.linearDamping = 1;
+                   // _bubbleManager.rb.linearDamping = 1;
                     jumpTimeLeft = jumpDuration;
                     jumpVelocity = Vector3.up * jumpForce;
 
@@ -204,7 +205,8 @@ namespace Code.Scripts.Characters.Bubble
         private void OnCollisionEnter(Collision collision)
         {
             // Ensure the ground has the "Ground" tag
-            
+            if (!collision.gameObject.CompareTag("Ground"))
+            {
                 isGrounded = true;
                 isJumping = false;
                 Debug.Log("velocity  thenya" + _bubbleManager.rb.linearVelocity.y);
@@ -214,6 +216,17 @@ namespace Code.Scripts.Characters.Bubble
                 }
                
                 _bubbleManager.rb.linearDamping = 0; 
+            }
+
+            if (collision.gameObject.CompareTag("Ground"))
+            {
+                
+                Vector3 currentVelocity = _bubbleManager.rb.linearVelocity;
+                
+                _bubbleManager.rb.linearVelocity = new Vector3(dashVelocity.x, currentVelocity.y, dashVelocity.z);
+
+               
+            }
               
             
         }
@@ -225,14 +238,17 @@ namespace Code.Scripts.Characters.Bubble
 
         public void  handleShooting()
         { 
-            if (PlayerInputManager.Instance.shootInput && _bubbleManager.bubbleData.item) 
-            {
-                PlayerInputManager.Instance.shootInput = false;
-                float shootForce = 10f;
-                _bubbleManager.bubbleData.item.GetComponent<ItemManager>().ShootItem(_movementDirection,10f);
-                
-                _bubbleManager.bubbleData.item=null;
-                
+            if (PlayerInputManager.Instance.shootInput ) 
+            { PlayerInputManager.Instance.shootInput = false;
+                if (_bubbleManager.bubbleData.item)
+                {
+                   
+                    _bubbleManager.bubbleData.item.GetComponent<ItemManager>().transform.position = PositionShooting.position;
+                    _bubbleManager.bubbleData.item.GetComponent<ItemManager>().transform.rotation = PositionShooting.rotation;
+                    _bubbleManager.bubbleData.item.GetComponent<ItemManager>().ShootItem(new Vector3(_movementDirection.x,0,_movementDirection.y) , 10f);
+
+                    _bubbleManager.bubbleData.item = null;
+                }
             }
         }
     }
