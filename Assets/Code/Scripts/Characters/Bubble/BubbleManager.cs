@@ -21,6 +21,8 @@ namespace Code.Scripts.Characters.Bubble
 
         private void Update()
         {
+            if(bubbleData.heartLevel<=0)
+                gameObject.SetActive(false);
             if (PlayerInputManager.Instance.interactInput)
             {
                 PlayerInputManager.Instance.interactInput = false;

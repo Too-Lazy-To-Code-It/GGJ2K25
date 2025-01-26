@@ -10,13 +10,10 @@ public class CercleKillScript : MonoBehaviour
 
     void Update()
     {
-        // Rotate the object around the world X-axis
         transform.Rotate(rotationSpeed * Time.deltaTime, 0f, 0f, Space.Self);
-
-        // Calculate the relative Z movement based on time
+        
         movementOffset = Mathf.PingPong(Time.time * movementSpeed, movementRange * 2) - movementRange;
-
-        // Update the position along the local Z-axis
+        
         transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, movementOffset);
     }
 }

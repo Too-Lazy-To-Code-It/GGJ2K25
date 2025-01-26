@@ -8,7 +8,7 @@ namespace Code.Scripts.Characters.Npcs
         {
             if (other.CompareTag("Player"))
             {
-                other.gameObject.SetActive(false);
+                other.gameObject.GetComponent<BubbleData>().heartLevel--;
             }
         }
     }

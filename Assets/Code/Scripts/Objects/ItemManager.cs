@@ -18,8 +18,6 @@ namespace Code.Scripts.Objects
                 var bubbleManager = other.gameObject.GetComponent<BubbleManager>();
                 if (!bubbleManager.bubbleData.item  )
                 {
-                    
-                 
                     bubbleManager.bubbleData.item = gameObject;
                     _currentBubbleManager = bubbleManager;
                     _absorbTransform = other.gameObject.transform.Find("Absorb");

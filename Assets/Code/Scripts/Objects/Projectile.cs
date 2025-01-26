@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Code.Scripts.Characters.Npcs
+namespace Code.Scripts.Objects
 {
     public class Projectile : MonoBehaviour
     {
@@ -16,7 +16,7 @@ namespace Code.Scripts.Characters.Npcs
         {
             if (other.CompareTag("Player"))
             {
-                    other.gameObject.SetActive(false);
+                other.gameObject.GetComponent<BubbleData>().heartLevel--;
             }
         }
     }
