@@ -2,28 +2,21 @@ using UnityEngine;
 
 public class CercleKillScript : MonoBehaviour
 {
-    [SerializeField] private float rotationSpeed = 90f; // Degrees per second for X-axis rotation
-    [SerializeField] private float positionSpeed = 2f; // Speed of movement along Z-axis
-    [SerializeField] private float positionMinZ = -1f; // Minimum Z position
-    [SerializeField] private float positionMaxZ = 1f; // Maximum Z position
+    [SerializeField] private float rotationSpeed = 90f; // Degrees per second for world X-axis rotation
+    [SerializeField] private float movementSpeed = 2f; // Speed of movement along local Z-axis
+    [SerializeField] private float movementRange = 1f; // Distance the object moves back and forth along the Z-axis
 
-    private Vector3 initialPosition;
-
-    void Start()
-    {
-        // Store the initial position of the GameObject
-        initialPosition = transform.position;
-    }
+    private float movementOffset;
 
     void Update()
     {
-        // Rotate continuously along the X-axis
-        transform.Rotate(rotationSpeed * Time.deltaTime, 0f, 0f);
+        // Rotate the object around the world X-axis
+        transform.Rotate(rotationSpeed * Time.deltaTime, 0f, 0f, Space.Self);
 
-        // Calculate the oscillating Z position using Mathf.PingPong
-        float zPosition = Mathf.Lerp(positionMinZ, positionMaxZ, Mathf.PingPong(Time.time * positionSpeed, 1));
-        
-        // Apply the new Z position while keeping X and Y unchanged
-        transform.position = new Vector3(initialPosition.x, initialPosition.y, zPosition);
+        // Calculate the relative Z movement based on time
+        movementOffset = Mathf.PingPong(Time.time * movementSpeed, movementRange * 2) - movementRange;
+
+        // Update the position along the local Z-axis
+        transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, movementOffset);
     }
 }
