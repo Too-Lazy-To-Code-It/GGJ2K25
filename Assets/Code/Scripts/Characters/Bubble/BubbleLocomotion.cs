@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Code.Scripts.Objects;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -63,6 +64,7 @@ namespace Code.Scripts.Characters.Bubble
             HandleRotations();
             HandleDash();
             HandleJump();
+            handleShooting();
         }
 
         private void HandleGroundedMovement()
@@ -221,6 +223,17 @@ namespace Code.Scripts.Characters.Bubble
             transform.position = defaultPosition;
         }
 
-
+        public void  handleShooting()
+        { 
+            if (PlayerInputManager.Instance.shootInput && _bubbleManager.bubbleData.item) 
+            {
+                PlayerInputManager.Instance.shootInput = false;
+                float shootForce = 10f;
+                _bubbleManager.bubbleData.item.GetComponent<ItemManager>().ShootItem(_movementDirection,10f);
+                
+                _bubbleManager.bubbleData.item=null;
+                
+            }
+        }
     }
 }

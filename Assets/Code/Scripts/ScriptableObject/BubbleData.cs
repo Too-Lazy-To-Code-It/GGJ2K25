@@ -15,7 +15,7 @@ public class BubbleData : ScriptableObject
     [Header("Bubble State")]
     public BubbleState currentState = BubbleState.Idle;
     public int score;
-    public bool hasItem;
+    public GameObject item;
 
     [Header("Heart Level")]
     [Range(0, 2)] 

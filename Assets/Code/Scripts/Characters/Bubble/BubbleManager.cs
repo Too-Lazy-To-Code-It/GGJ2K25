@@ -14,7 +14,7 @@ namespace Code.Scripts.Characters.Bubble
             base.Awake();
             rb = GetComponent<Rigidbody>();
             locomotion = GetComponent<BubbleLocomotion>();
-            bubbleData.hasItem = false;
+            bubbleData.item = null;
             rb.freezeRotation = true;
             
         }
