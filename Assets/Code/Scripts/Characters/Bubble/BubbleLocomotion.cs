@@ -218,7 +218,7 @@ namespace Code.Scripts.Characters.Bubble
                 _bubbleManager.rb.linearDamping = 0; 
             
 
-            if (collision.gameObject.CompareTag("Ground"))
+            if (collision.gameObject.CompareTag("obstacle"))
             {
                 
                 Vector3 currentVelocity = _bubbleManager.rb.linearVelocity;
