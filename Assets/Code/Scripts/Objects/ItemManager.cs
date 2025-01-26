@@ -49,10 +49,6 @@ namespace Code.Scripts.Objects
                 
             }
 
-
-
-
-
         }
 
         public void ShootItem(Vector3 direction, float force)
@@ -78,16 +74,22 @@ namespace Code.Scripts.Objects
 
             if (other.gameObject.CompareTag("Respawn"))
             {
-                //Destroy(this.gameObject);
                 Respawn();
+                Destroy(this.gameObject);
                 Debug.Log("Respawning the box");
             }
         }
 
         void Respawn()
         {
-            this.gameObject.transform.position = initialPosition;
-            this.gameObject.transform.rotation = initialRotation;
+            //this.gameObject.transform.position = initialPosition;
+            //this.gameObject.transform.rotation = initialRotation;
+
+            GameObject _GO = Instantiate(this.gameObject, initialPosition, initialRotation);
+            Rigidbody _r = _GO.GetComponent<Rigidbody>();
+            Destroy(_r);
+
+
 
 
         }
