@@ -41,16 +41,13 @@ namespace Code.Scripts.Characters.Npcs
             
         }
 
-        public void Chasing()
+        public bool isPlayerClose(Vector3 playerPosition)
         {
-            
+                NavMeshHit hit;
+                return NavMesh.SamplePosition(playerPosition, out hit, 1f, NavMesh.AllAreas);
         }
 
-        public bool isPlayerClose()
-        {
-            NavMeshHit hit;
-            return NavMesh.SamplePosition(transform.position, out hit, 1f, NavMesh.AllAreas);
-        }
+
         private void SetNewRandomDestination()
         {
             Vector3 randomDirection = Random.insideUnitSphere*_roamRadius;
