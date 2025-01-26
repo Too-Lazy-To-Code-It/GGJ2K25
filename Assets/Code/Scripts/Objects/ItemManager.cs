@@ -30,13 +30,15 @@ namespace Code.Scripts.Objects
                 var bubbleManager = other.gameObject.GetComponent<BubbleManager>();
                 if (!bubbleManager.bubbleData.item  )
                 {
+                    
+                 
                     bubbleManager.bubbleData.item = gameObject;
                     _currentBubbleManager = bubbleManager;
                     _absorbTransform = other.gameObject.transform.Find("Absorb");
                     gameObject.transform.SetParent(_absorbTransform);
                     gameObject.transform.localPosition = Vector3.zero;
                     gameObject.transform.localRotation = Quaternion.identity;
-                    gameObject.transform.localScale = Vector3.one;
+                     
                 }
             }
 
